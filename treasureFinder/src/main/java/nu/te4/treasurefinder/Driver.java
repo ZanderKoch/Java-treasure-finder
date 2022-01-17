@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -33,6 +35,9 @@ public class Driver{
             System.out.println("answer for first task:");
             System.out.println(task1(frequencyChanges));
             
+            System.out.println("answer for second task:");
+            System.out.println(task2(frequencyChanges));
+            
             
         }
         catch(Exception e){
@@ -55,5 +60,25 @@ public class Driver{
         return currentFrequency;
     }
     
-    
+    /**
+     * starts at frequency 0, applies frequency changes until a frequency is
+     * landed on twice, then returns this frequency
+     */
+    public static int task2(ArrayList<Integer> frequencyChanges){
+        int currentFrequency = 0;
+        HashSet<Integer> found = new HashSet();
+        found.add(0);
+        
+        while(true){
+           for(int frequency : frequencyChanges){
+               currentFrequency += frequency;
+               if(found.contains(currentFrequency)){
+                  return currentFrequency;
+               }
+               else{
+                   found.add(currentFrequency);
+               }
+           }
+        }
+    }
 }
